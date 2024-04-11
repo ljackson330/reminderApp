@@ -1,6 +1,5 @@
-let database = require("../database");
+
 const passport = require("../middleware/passport");
-const { forwardAuthenticated } = require("../middleware/checkAuth");
 
 let authController = {
   login: (req, res) => {
@@ -11,9 +10,15 @@ let authController = {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res) => {
-    // implement later
+  loginSubmit: (req, res, next) => {
+    passport.authenticate("local", {
+      successRedirect: "/reminders",
+      failureRedirect: "/login",
+      failureFlash: true
+    })(req, res, next); 
   },
+  
+
 
   registerSubmit: (req, res) => {
     // implement later

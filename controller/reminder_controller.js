@@ -2,7 +2,7 @@ let database = require("../database");
 
 let remindersController = {
     list: (req, res) => {
-        res.render("reminder/index", { reminders: database.cindy.reminders });
+        res.render("reminder/index", { reminders: database.user.reminders });
     },
 
     new: (req, res) => {
@@ -11,30 +11,30 @@ let remindersController = {
 
     listOne: (req, res) => {
         let reminderToFind = req.params.id;
-        let searchResult = database.cindy.reminders.find(function (reminder) {
+        let searchResult = database.user.reminders.find(function (reminder) {
             return reminder.id == reminderToFind;
         });
         if (searchResult != undefined) {
             res.render("reminder/single-reminder", { reminderItem: searchResult });
         } else {
-            res.render("reminder/index", { reminders: database.cindy.reminders });
+            res.render("reminder/index", { reminders: database.user.reminders });
         }
     },
 
     create: (req, res) => {
         let reminder = {
-            id: database.cindy.reminders.length + 1,
+            id: database.user.reminders.length + 1,
             title: req.body.title,
             description: req.body.description,
             completed: false,
         };
-        database.cindy.reminders.push(reminder);
+        database.user.reminders.push(reminder);
         res.redirect("/reminders");
     },
 
     edit: (req, res) => {
         let reminderToFind = req.params.id;
-        let searchResult = database.cindy.reminders.find(function (reminder) {
+        let searchResult = database.user.reminders.find(function (reminder) {
             return reminder.id == reminderToFind;
         });
         res.render("reminder/edit", { reminderItem: searchResult });
@@ -44,7 +44,7 @@ let remindersController = {
         // Get the reminder ID from the request body
         let reminderId = req.params.id;
         // Needs to be changed - lookup user reminders from request body user
-        let userReminders = database.cindy.reminders;
+        let userReminders = database.user.reminders;
 
         // Find the index of the reminder with the given ID
         let indexToUpdate = userReminders.findIndex(
@@ -67,7 +67,7 @@ let remindersController = {
         // Get the reminder ID from request body
         let reminderId = req.params.id;
         // Needs to be changed
-        let userReminders = database.cindy.reminders;
+        let userReminders = database.user.reminders;
 
         // Find the index of the reminder with the given ID
         let indexToDelete = userReminders.findIndex(

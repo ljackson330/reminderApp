@@ -1,13 +1,16 @@
+require('dotenv').config()
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
-const { getUserByEmailIdAndPassword, getUserById } = require("./controller/user_controller");
+const flash = require('connect-flash');
+
+const app = express()
+
+app.use(flash());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -33,29 +36,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(
-    { usernameField: 'email' },
-    function(email, password, done) {
-        const user = getUserByEmailIdAndPassword(email, password);
-        if (!user) {
-            return done(null, false, { message: 'Incorrect email or password.' });
-        }
-        return done(null, user);
-    }
-));
-
-// Serialize and deserialize user
-passport.serializeUser(function(user, done) {
-    done(null, user.id); // Assuming user object has an 'id' field
-});
-
-passport.deserializeUser(function(id, done) {
-    const user = getUserById(id);
-    if (!user) {
-        return done(null, false);
-    }
-    return done(null, user);
-});
+    // Middleware for express
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes start here
 app.get("/reminders", reminderController.list);

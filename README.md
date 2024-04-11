@@ -35,3 +35,6 @@ Chrystian Kwasnik:
 - const store = req.sessionstore;
 - store.all(err, session)
 - object.keys(sessions)
+
+const userController = require("../controller/user_controller");
+const { getUserByEmailIdAndPassword, getUserById } = require("./controller/user_controller");
