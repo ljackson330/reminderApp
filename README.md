@@ -1,11 +1,28 @@
 Breakdown of work:
 
-March 28th:
-
 Liam Jackson:
+
+Week 1:
+- Watched videos: 
+  -Understanding our Term Project Start Code Part 1
+  -Understanding our Term Project Start Code Part 2
+  -Understanding our Term Project Start Code Part 3
+  
 - I worked on and completed the functions to edit and delete existing tasks
 
+Week 2:
+
 Chrystian Kwasnik:
+
+Week 1:
+- Watched videos: 
+  -Understanding our Term Project Start Code Part 1
+  -Understanding our Term Project Start Code Part 2
+  -Understanding our Term Project Start Code Part 3
+  -Passport Lecture
+
+Week 2:
+
 - I worked on and completed the functions to edit and delete existing tasks
 
 [x] copy everything related to session and passport from server.js
@@ -22,11 +39,9 @@ Chrystian Kwasnik:
 
 [x] copy image from public directory
 
-[ ] change /auth/login to /login
+[x] change /auth/login to /login
 
-[ ] copy login and logout from passport starter code
-
-[ ] replacing redirect, /auth/login
+[x] replacing redirect, /auth/login
 
 [ ] store.all, store.destroy(sid,callback)
 
