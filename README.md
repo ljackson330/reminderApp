@@ -15,6 +15,7 @@
 - Added a logout button
 - Added admin page (/admin/sessions) to manually destroy current sessions
 
+----
 
 ### Chrystian Kwasnik:
 
