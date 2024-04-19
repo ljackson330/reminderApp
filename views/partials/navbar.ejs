@@ -9,4 +9,7 @@
       <a class="nav-item nav-link" href="/reminder/new">Create</a>
     </div>
   </div>
+  <% if (authenticated) { %>
+    <a href="/logout" class="btn btn-primary">Logout</a>
+  <% } %>
 </nav>

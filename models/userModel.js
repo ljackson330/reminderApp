@@ -1,63 +1,29 @@
 const database = [
   {
     id: 1,
-    name: "Jimmy Smith",
-    email: "jimmy123@gmail.com",
-    password: "jimmy123!",
-    role: "admin",
+    name: "Alice",
+    email: "alice@example.com",
+    password: "password123",
+    role: "user",
     reminders: []
   },
   {
     id: 2,
-    name: "Johnny Doe",
-    email: "johnny123@gmail.com",
-    password: "johnny123!",
+    name: "Bob",
+    email: "bob@example.com",
+    password: "password456",
     role: "user",
     reminders: []
   },
   {
     id: 3,
-    name: "Jonathan Chen",
-    email: "jonathan123@gmail.com",
-    password: "jonathan123!",
-    role: "user",
-    reminders: []
-  },
-  {
-    id: 42,
-    name: "Admin Admin",
-    email: "admin@localhost.com",
-    password: "foo_bar123!",
-    role: "user",
+    name: "admin",
+    email: "admin@example.com",
+    password: "admin",
+    role: "admin",
     reminders: []
   }
 ];
-
-// Function to add a new user to the database
-function addUserToDatabase(user) {
-  // Check if the user already exists in the database (based on some unique identifier like email or ID)
-  const existingUser = database.find((entry) => entry.id === user.id);
-
-  // If the user doesn't already exist in the database, add them
-  if (!existingUser) {
-    // Here, you can map the properties you need from the user object to the database entry
-    const newUserEntry = {
-      id: user.id,
-      name: user.displayName, // Assuming displayName is the name property for GitHub users
-      email: user.email, // Assuming email is available from GitHub
-      // Add any other properties you want to store in the database entry
-    };
-
-    // Add the new user entry to the database array
-    database.push(newUserEntry);
-
-    // Optionally, you can return the newly added user entry
-    return newUserEntry;
-  }
-
-  // Return null if the user already exists in the database
-  return null;
-}
 
 const userModel = {
   findOne: (email) => {
@@ -74,6 +40,23 @@ const userModel = {
     }
     throw new Error(`Couldn't find user with id: ${id}`);
   },
+  addUserToDatabase: (user) => {
+    const existingUser = database.find((entry) => entry.email === user.email);
+    if (!existingUser) {
+      const newUserEntry = {
+        id: database.length + 1,
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        role: 'user',
+        reminders: [],
+        sessionId: null
+      };
+      database.push(newUserEntry);
+      return newUserEntry;
+    }
+    return null;
+  },
 };
 
-module.exports = { database, userModel, addUserToDatabase };
+module.exports = { database, userModel };

@@ -1,0 +1,9 @@
+<% sessionList.forEach(session => { %>
+    <div class="session">
+        <p>Session ID: <%= session.sessionId %></p>
+        <p>User Name: <%= session.userName %></p>
+        <form action="/admin/sessions/delete/<%= session.sessionId %>" method="POST">
+            <button type="submit">Delete Session</button>
+        </form>
+    </div>
+<% }); %>
